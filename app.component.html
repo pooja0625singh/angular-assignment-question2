@@ -1,0 +1,79 @@
+<div class = "empform">
+  <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
+  
+    <p>
+      <label for="employeename">Employee Name</label>
+      <input type="text" id="employeename" name="employeename" required #employeename="ngModel"
+      [(ngModel)]="contact.employeename">
+    </p>
+    <div *ngIf="!employeename?.valid && (employeename?.dirty || employeename?.touched)" class="error">
+      <div *ngIf="employeename.errors.required">
+        Employee Name is required
+      </div>
+    </div>
+  
+    <p>
+      <label for="employeeaddress">Employee Address</label>
+      <input type="text" id="employeeaddress" name="employeeaddress" required #employeeaddress="ngModel" 
+      [(ngModel)]="contact.employeeaddress">
+    </p>
+    <div *ngIf="!employeeaddress?.valid && (employeeaddress?.dirty || employeeaddress?.touched)" class="error">
+      <div *ngIf="employeeaddress.errors.required">
+        Employee Address is required
+      </div>
+    </div>
+  
+    <p>
+      <label for="employeephonenumber">Employee Phone Number </label>
+      <input type="tel" id="employeephonenumber" name="employeephonenumber" pattern="[0-9]{5}-[0-9]{5}" required
+      minlength= "10" maxlength="10" #employeephonenumber="ngModel" [(ngModel)]="contact.employeephonenumber">
+    </p>
+    <div *ngIf="!employeephonenumber?.valid && (employeephonenumber?.dirty || employeephonenumber?.touched)" class="error">
+      <div *ngIf="employeephonenumber.errors.required">
+        Employee Phone Number is required
+      </div>
+      <div *ngIf="employeephonenumber.errors.maxlength">
+        Phone Number Minimum Length is {{employeephonenumber.errors.maxlength?.requiredLength}}
+      </div>
+      <div *ngIf="employeephonenumber.errors.minlength">
+        Phone Number Maximum Length is {{employeephonenumber.errors.minlength?.requiredLength}}
+      </div>
+      <div *ngIf="employeephonenumber.errors.pattern">
+        Only numbers are allowed
+      </div>
+    </div>
+
+    <p>
+      <label for="employeedob">Employee Date of Birth </label>
+      <input type="date" id="employeedob" name="employeedob" required 
+      #employeedob="ngModel" [(ngModel)]="contact.employeedob">
+    </p>
+    <div *ngIf="!employeedob?.valid && (employeedob?.dirty || employeedob?.touched)" class="error">
+      <div *ngIf="employeedob.errors.required">
+        Employee Date of Birth is required
+      </div>
+    </div>
+
+    <p>
+      <label for="employeeemail">Employee Email </label>
+      <input type="email" id="employeeemail" name="employeeemail" required 
+      #employeeemail="ngModel" [(ngModel)]="contact.employeeemail">
+    </p>
+    <div *ngIf="!employeeemail?.valid && (employeeemail?.dirty || employeeemail?.touched)" class="error">
+      <div *ngIf="employeeemail.errors.required">
+        Employee Email is required
+      </div>
+      <div *ngIf="employeeemail.errors.email">
+        Invalid Email Address
+      </div>
+    </div>
+  
+  
+    <p>
+      <button type="submit" [disabled]="!contactForm.valid">Submit</button>
+    </p>
+  
+  </form>
+</div>
+
+
